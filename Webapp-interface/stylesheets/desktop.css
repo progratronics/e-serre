@@ -1,0 +1,185 @@
+
+
+body {
+	font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu;
+	color: white;
+	background-color: rgb(31, 31, 71);
+	/* largeur | style | couleur */
+	font-size: 25px;
+	font-style: bold;
+}
+
+.informations {
+	margin: auto;
+	font-size: 15px;
+	text-align: center;
+	width: 90%;
+}
+
+.container {
+	justify-content: center;
+	margin: auto;
+	width: 90%;
+	display: flex;
+	flex-direction: row;
+	flex-flow: wrap;
+}
+
+.temperature {
+	margin: 1%;
+	position: relative;
+	width: 20%;
+	height: 350px;
+	text-align: center;
+	border-radius: 20px;
+	background: rgba(0, 0, 0, 0) radial-gradient(218.51% 281.09% at 100% 100%, rgba(253, 63, 51, 0.6) 0%, rgba(76, 0, 200, 0.6) 45.83%, rgba(76, 0, 200, 0.6) 100%) repeat scroll 0% 0%;
+}
+
+.light {
+	margin: 1%;
+	position: relative;
+	width: 20%;
+	height: 350px;
+	text-align: center;
+	border-radius: 20px;
+	background: rgba(0, 0, 0, 0) linear-gradient(209.21deg, rgb(215, 81, 65) 13.57%, rgb(215, 65, 101) 98.38%) repeat scroll 0% 0%;
+}
+
+.carbon {
+	margin: 1%;
+	position: relative;
+	width: 20%;
+	height: 350px;
+	text-align: center;
+	border-radius: 20px;
+	background: rgba(0, 0, 0, 0) linear-gradient(209.21deg, rgb(94, 44, 141) 13.57%, rgb(211, 49, 137) 98.38%) repeat scroll 0% 0%;
+}
+
+.water {
+	margin: 1%;
+	position: relative;
+	width: 20%;
+	height: 350px;
+	text-align: center;
+	border-radius: 20px;
+	background: rgba(0, 0, 0, 0) linear-gradient(209.21deg, rgb(48, 173, 221) 13.57%, rgb(64, 26, 190) 98.38%) repeat scroll 0% 0%;
+}
+
+
+.humidity {
+	margin: 1%;
+	position: relative;
+	width: 42%;
+	height:  350px;
+	text-align: center;
+	border-radius: 20px;
+	background: rgba(0, 0, 0, 0) linear-gradient(209.21deg, rgb(4, 20, 104) 13.57%, rgb(73, 18, 229) 98.38%) repeat scroll 0% 0%;
+}
+
+.fan {
+	margin: 1%;
+	position: relative;
+	width: 20%;
+	height: 350px;
+	text-align: center;
+	font-size: 30px;
+	box-sizing: border-box;
+	border-radius: 20px;
+	background: rgba(0, 0, 0, 0) linear-gradient(209.21deg, rgb(215, 81, 65) 13.57%, rgb(215, 65, 101) 98.38%) repeat scroll 0% 0%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.pump {
+	margin: 1%;
+	position: relative;
+	width: 20%;
+	height:  350px;
+	text-align: center;
+	box-sizing: border-box;
+	border-radius: 20px;
+	background: rgba(0, 0, 0, 0) linear-gradient(209.21deg, rgb(12, 39, 178) 13.57%, rgb(133, 218, 213) 98.38%) repeat scroll 0% 0%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+
+/* Donc on peut faire bouger l'image comme on veut (formaliser) */
+
+#fan_image {
+	position: relative;
+	height: 100px;
+}
+
+#pump_image {
+	height: 100px;
+	position: relative;
+}
+
+#fan_button {
+	position: relative;
+}
+
+#water_button {
+	position: relative;
+}
+
+.switch {
+	margin-top: 5px;
+	position: relative;
+	display: inline-block;
+	width: 60px;
+	height: 34px;
+}
+
+
+/* C'est pour faire bouger le span */
+
+
+/* Le slider */
+
+.slider {
+	position: absolute;
+	cursor: pointer;
+	top: 0px;
+	bottom: 0px;
+	right: 0px;
+	left: 2px;
+	border-radius: 34px;
+	background-color: #0035e2;
+}
+
+
+/* L'élèment enfant donc le cercle */
+
+.slider::before {
+	position: absolute;
+	content: "";
+	height: 26px;
+	width: 26px;
+	left: 4px;
+	bottom: 4px;
+	border-radius: 34px;
+	background-color: #ffffff;
+	transition: .5s;
+}
+
+
+/* Quand on clique sur l'input le slider change de CSS */
+
+input:checked+.slider {
+	background-color: #559430;
+}
+
+input:checked+.slider:before {
+	transform: translateX(26px);
+}
+
+      #g1s,#g2s, #g3s, #g4s,#g5s,#g6s {
+        width:100px; height:80px;
+        display: inline-block;
+        margin: 1em;
+      }
+

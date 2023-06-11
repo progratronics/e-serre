@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>La serre connecté</title>
+    <link rel="stylesheet" type="text/css" href="stylesheets/desktop.css">
+    <link rel="stylesheet" type="text/css" media="screen and (min-width: 128px) and (max-width: 720px)" href="stylesheets/smartphone.css">
+    <link rel="stylesheet" type="text/css" media="screen and (min-width: 720px) and (max-width: 1024px)" href="stylesheets/tablet.css">
+
+    <script type="text/javascript" src="justgage.js"></script>
+    <script type="text/javascript" src="raphael-2.1.4.min.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js'></script>
+    <script src="https://code.jscharting.com/2.9.0/jscharting.js"></script>
+
+    <script>
+        var socket = io();
+
+        function pump() {
+            //Ce message est envoyé vers le serveur qui s'en occupe
+            socket.emit('pumpClicked');
+        }
+
+        function fan() {
+            //Ce message est envoyé vers le serveur qui s'en occupe
+            socket.emit('fanClicked');
+        }
+
+
+
+        var temperatureValueGlobal;
+        socket.on('temperatureValue', function(temperatureValue) {
+           // document.getElementById("temperature_element").innerHTML = 'La température ' + temperatureValue;
+           temperatureValueGlobal = temperatureValue;
+        });
+
+        var humidityValueGlobal;
+        socket.on('humidityValue', function(humidityValue) {
+           // document.getElementById("humidity_element").innerHTML = 'L\'humidité ' + humidityValue;
+            humidityValueGlobal = humidityValue;
+        });
+
+        var sead_humidityValueGlobal;
+        socket.on('sead_humidityValue', function(sead_humidityValue) {
+           // document.getElementById("sead_humidity_element").innerHTML = 'L\'humidité dans le sol ' + sead_humidityValue;
+            sead_humidityValueGlobal = sead_humidityValue;
+        });
+
+
+        var brightnessValueGlobal;
+        socket.on('brightnessValue', function(brightnessValue) {
+           // document.getElementById("brightness_element").innerHTML = 'L\'intensité lumineuse ' + brightnessValue;
+            brightnessValueGlobal = brightnessValue;
+        });
+
+        var carbonValueGlobal;
+        socket.on('carbonValue', function(carbonValue) {
+           // document.getElementById("carbon_element").innerHTML = 'Le niveau de Co2 ' + carbonValue;
+            carbonValueGlobal = carbonValue;
+        });
+
+        //var waterValueGlobal=0;
+        //socket.on('waterValue', function(waterValue) {
+            //document.getElementById("water_element").innerHTML = 'Le niveau d\'eau ' + waterValue;
+            //waterValueGlobal = waterValue;
+          //  console.log(waterValueGlobal);
+        //});
+
+        var waterValueGlobal;
+        var a;
+        socket.on('waterValue', function(waterValue) {
+            waterValueGlobal = waterValue;
+            //console.log(1);
+            //console.log(waterValue);
+            a=2;
+        });
+
+
+        var g1,g2,g3,g4,g5,g6;
+
+              window.onload = function(){
+                var g1 = new JustGage({
+                  id: "g1s",
+                  value: 0,
+                  min: 0,
+                  max: 100,
+                  title: "",
+                  label: "Celsius"
+                });
+                        var g2 = new JustGage({
+                  id: "g2s",
+                  value: 0,
+                  min: 0,
+                  max: 100,
+                  title: "",
+                  label: "Candila"
+                });
+                        var g3 = new JustGage({
+                  id: "g3s",
+                  value: 0,
+                  min: 0,
+                  max: 100,
+                  title: "",
+                  label: "%"
+                });
+                    
+                    var g4 = new JustGage({
+                  id: "g4s",
+                  value: 0,
+                  min: 0,
+                  max: 100,
+                  title: "",
+                  label: "%"
+                });
+
+                                        var g5 = new JustGage({
+                  id: "g5s",
+                  value: 0,
+                  min: 0,
+                  max: 100,
+                  title: "",
+                  label: "%"
+                });
+
+
+                                                        var g6 = new JustGage({
+                  id: "g6s",
+                  value: 0,
+                  min: 0,
+                  max: 100,
+                  title: "",
+                  label: "%"
+                });
+
+                setInterval(function() {
+
+        g1.refresh(temperatureValueGlobal);
+        g2.refresh(humidityValueGlobal);
+        g3.refresh(sead_humidityValueGlobal);
+        g4.refresh(brightnessValueGlobal);
+        g5.refresh(carbonValueGlobal);
+        g6.refresh(waterValueGlobal);
+         
+        }, 500);
+      };
+
+        </script>
+
+<body>
+            <div class="informations">
+                <h2>Serre connectée</h2>
+                <h3>Bienvenue 👋🏻</h3>
+                <p>SADALI Mohand et TOURE Alkaya</p>
+                <p>TER L3</p>
+            </div>
+            <div class="container">
+                <div class="temperature">
+                    <p>Température 🌡️</p>
+                    <p id="temperature_element"></p>
+                     <div id="g1s"></div>
+                </div>
+                <div class="light">
+                    <p>Intensité lumineuse 💡</p>
+                    <p id="brightness_element"></p>
+                     <div id="g2s"></div>
+                </div>
+                <div class="carbon">
+                    <p>Monoxyde de carbon</p>
+                    <p id="carbon_element"></p>
+                          <div id="g3s"></div>
+                </div>
+                <div class="water">
+                    <p>Niveau d'eau</p>
+                    <p id="water_element"></p>
+                         <div id="g4s"></div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="humidity">
+                    <p>Humidité dans le sol et humidité dans l'air</p>
+                    <p id="sead_humidity_element"></p>
+                    <p id="humidity_element"></p>
+                      <div id="g5s"></div>
+                      <div id="g6s"></div>
+                </div>
+                <div class="fan">
+
+
+
+                    <form>
+                    <img id="fan_image" src="assets/fan.svg">
+
+                        <div id="fan_button">
+                            <label class="switch">
+                                <input type="checkbox" onclick="fan()">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="pump">
+
+ 
+                    <form>
+                          <img id="pump_image"src="assets/pump.svg">
+
+                        <div id="pump_button">
+                            <label class="switch">
+                                <input type="checkbox" onclick="pump()">
+                                <span class="slider round"></span>
+                            </label>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+</body>
+</html>
